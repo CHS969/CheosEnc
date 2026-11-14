@@ -118,7 +118,7 @@ def encpy():
 
     with open(As + "_en.py", "w") as fileout:
         fileout.write("# Encrypted by Cheos969\n")
-        fileout.write("# Original: https://github.com/Anon4You/EncTool\n")
+        fileout.write("# Original: https://raw.githubusercontent.com/CHS969/CheosEnc\n")
         fileout.write("import marshal\n")
         fileout.write("exec(marshal.loads(" + repr(data) + "))")
     time.sleep(1)
