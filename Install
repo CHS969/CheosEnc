@@ -39,7 +39,7 @@ fi
 
 # 5. Download enctool
 echo -e "${YELLOW}[*] Downloading enctool...${NC}"
-curl -sSL https://raw.githubusercontent.com/Anon4You/EncTool/main/enctool -o enctool
+curl -sSL https://raw.githubusercontent.com/CHS969/CheosEnc/refs/heads/main/enctool.py -o enctool.py
 if [ ! -s enctool ]; then
     echo -e "${RED}[✗] Gagal download enctool. Cek koneksi/URL.${NC}"
     exit 1
@@ -57,7 +57,7 @@ if command -v enctool >/dev/null 2>&1 ; then
     echo -e "${GREEN}========================================${NC}"
     echo -e "${GREEN}  Successfully installed Encrypter!${NC}"
     echo -e "${GREEN}========================================${NC}"
-    echo -e "Ketik: ${GREEN}enctool${NC} untuk menjalankan"
+    echo -e "Ketik: ${GREEN}enctool.py${NC} untuk menjalankan"
 else
     echo -e "${RED}[✗] Gagal install. Cek manual: ls $BINDIR/enctool${NC}"
     exit 1
