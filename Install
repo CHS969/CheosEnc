@@ -1,0 +1,64 @@
+#!/bin/bash
+# EncTool Installer - Termux fix
+# Original Copyright (c) 2023 cheos969
+# Licensed under MIT License
+
+RED='\e[31m'
+GREEN='\e[32m'
+YELLOW='\e[33m'
+NC='\e[0m'
+
+echo -e "${YELLOW}[*] Memulai instalasi EncTool...${NC}"
+
+# 1. Update
+pkg update -y 2>/dev/null || apt update -y
+pkg upgrade -y 2>/dev/null || apt upgrade -y
+
+# 2. Install Node.js (nama paket di Termux = 'node', di Debian = 'nodejs')
+if ! command -v node >/dev/null 2>&1 ; then
+    echo -e "${YELLOW}[*] Menginstall Node.js...${NC}"
+    pkg install nodejs -y 2>/dev/null || pkg install node -y 2>/dev/null \
+        || apt install nodejs -y 2>/dev/null || apt install node -y
+fi
+
+# 3. Install Python 3 (Enctool sudah dikonversi)
+if ! command -v python >/dev/null 2>&1 ; then
+    echo -e "${YELLOW}[*] Menginstall Python...${NC}"
+    pkg install python -y 2>/dev/null || apt install python3 -y
+fi
+
+# 4. Install bash-obfuscate
+if ! command -v bash-obfuscate >/dev/null 2>&1 ; then
+    echo -e "${YELLOW}[*] Menginstall bash-obfuscate...${NC}"
+    npm cache clean --force 2>/dev/null
+    npm -g install bash-obfuscate
+    if [ $? -ne 0 ]; then
+        npm -g install bash-obfuscate --unsafe-perm
+    fi
+fi
+
+# 5. Download enctool
+echo -e "${YELLOW}[*] Downloading enctool...${NC}"
+curl -sSL https://raw.githubusercontent.com/Anon4You/EncTool/main/enctool -o enctool
+if [ ! -s enctool ]; then
+    echo -e "${RED}[✗] Gagal download enctool. Cek koneksi/URL.${NC}"
+    exit 1
+fi
+
+# 6. Install ke $PREFIX/bin (Termux) atau /usr/local/bin (Linux)
+BINDIR="${PREFIX:-/usr/local}/bin"
+mkdir -p "$BINDIR"
+mv enctool "$BINDIR/enctool"
+chmod +x "$BINDIR/enctool"
+
+# 7. Verifikasi
+if command -v enctool >/dev/null 2>&1 ; then
+    clear
+    echo -e "${GREEN}========================================${NC}"
+    echo -e "${GREEN}  Successfully installed Encrypter!${NC}"
+    echo -e "${GREEN}========================================${NC}"
+    echo -e "Ketik: ${GREEN}enctool${NC} untuk menjalankan"
+else
+    echo -e "${RED}[✗] Gagal install. Cek manual: ls $BINDIR/enctool${NC}"
+    exit 1
+fi
