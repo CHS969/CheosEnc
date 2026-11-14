@@ -2,7 +2,7 @@
 
 Code Encrypter — encrypt/decrypt file bash dan encrypt python dalam format Marshal.
 
-> Original oleh [Cheos969](https://github.com/Anon4You/EncTool). MIT License.
+> Original oleh [Cheos969](https://raw.githubusercontent.com/CHS969/CheosEnc). MIT License.
 > Versi ini sudah diperbaiki untuk Termux / Python 3.
 
 ## Fitur
@@ -21,4 +21,4 @@ Code Encrypter — encrypt/decrypt file bash dan encrypt python dalam format Mar
 ## Instalasi
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/Anon4You/EncTool/main/Install | bash
+curl -sSL https://raw.githubusercontent.com/CHS969/CheosEnc/refs/heads/main/Install | bash
